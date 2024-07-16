@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - A Pen by Illarion Zavatskiy</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Illarion Zavatskyi - Full-Stack Developer</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <h1>Illarion Zavatskyi</h1>
+            <h2>Full-Stack Developer</h2>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="about">
+        <div class="container">
+            <h3>About Me</h3>
+            <p>A highly skilled Full-Stack Developer with over 6 years of experience in designing, implementing, and deploying scalable web applications. Proficient in both front-end and back-end technologies, consistently delivering high-quality code and creating user-friendly interfaces.</p>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <h3>Skills</h3>
+            <table>
+                <tr>
+                    <th>Front-End</th>
+                    <th>Back-End</th>
+                    <th>Database</th>
+                    <th>Tools</th>
+                </tr>
+                <tr>
+                    <td>HTML, CSS, JavaScript, React, Angular</td>
+                    <td>Node.js, Python, Java, PHP, Ruby on Rails</td>
+                    <td>MySQL, MongoDB, PostgreSQL</td>
+                    <td>Git, Docker, Kubernetes</td>
+                </tr>
+            </table>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <h3>Projects</h3>
+            <div class="projects-grid">
+                <div class="project-item">
+                    <h4>Real-Time Chat Application</h4>
+                    <p>Developed a real-time chat application using Node.js and React. This application supports multiple chat rooms, private messaging, and has a responsive design.</p>
+                    <button onclick="showProject('project-a')">View Project</button>
+                </div>
+                <div class="project-item">
+                    <h4>E-Commerce Platform</h4>
+                    <p>Built a scalable e-commerce platform with Python and Django. The platform includes features like product listings, shopping cart, order management, and payment integration.</p>
+                    <button onclick="showProject('project-b')">View Project</button>
+                </div>
+                <div class="project-item">
+                    <h4>Content Management System</h4>
+                    <p>Created a comprehensive CMS with custom plugins using PHP and Laravel. This system allows for easy content creation, editing, and publishing with user management features.</p>
+                    <button onclick="showProject('project-c')">View Project</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="project-details" style="display: none;">
+        <div class="container">
+            <!-- Real-Time Chat Application Project -->
+            <div id="project-a" class="project-content" style="display: none;">
+                <h3>Real-Time Chat Application</h3>
+                <div class="project-demo">
+                    <h4>Live Demo</h4>
+                    <p>Experience the real-time chat application with multiple chat rooms, private messaging, and real-time updates.</p>
+                    <div class="chat-container">
+                        <div id="chat-room" style="height: 200px; border: 1px solid #000; overflow-y: scroll;"></div>
+                        <input type="text" id="chat-input" placeholder="Type a message" style="width: 80%;">
+                        <button onclick="sendMessage()">Send</button>
+                    </div>
+                </div>
+                <div class="project-code">
+                    <h4>Code Snippet</h4>
+                    <pre><code>
+const express = require('express');
+const http = require('http');
+const socketIo = require('socket.io');
+const app = express();
+const server = http.createServer(app);
+const io = socketIo(server);
+
+io.on('connection', (socket) => {
+  console.log('New user connected');
+  socket.on('message', (msg) => {
+    io.emit('message', msg);
+  });
+});
+
+server.listen(3000, () => {
+  console.log('Server is running on port 3000');
+});
+                    </code></pre>
+                </div>
+                <button onclick="hideProject()">Back to Projects</button>
+            </div>
+
+            <!-- E-Commerce Platform Project -->
+            <div id="project-b" class="project-content" style="display: none;">
+                <h3>E-Commerce Platform</h3>
+                <div class="project-demo">
+                    <h4>Live Demo</h4>
+                    <p>Explore the e-commerce platform with product listings, shopping cart, order management, and payment integration.</p>
+                    <div class="ecommerce-container">
+                        <div class="product">
+                            <h5>Product Name</h5>
+                            <p>Description of the product.</p>
+                            <button>Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-code">
+                    <h4>Code Snippet</h4>
+                    <pre><code>
+from flask import Flask, render_template, request, redirect, url_for
+import stripe
+
+app = Flask(__name__)
+
+stripe.api_key = "your-stripe-api-key"
+
+@app.route('/checkout', methods=['POST'])
+def checkout():
+    amount = int(request.form['amount'])
+    customer = stripe.Customer.create(
+        email=request.form['stripeEmail'],
+        source=request.form['stripeToken']
+    )
+    charge = stripe.Charge.create(
+        customer=customer.id,
+        amount=amount,
+        currency='usd',
+        description='Flask Charge'
+    )
+    return redirect(url_for('thanks'))
+
+@app.route('/thanks')
+def thanks():
+    return render_template('thanks.html')
+
+if __name__ == '__main__':
+    app.run(debug=True)
+                    </code></pre>
+                </div>
+                <button onclick="hideProject()">Back to Projects</button>
+            </div>
+
+            <!-- Content Management System Project -->
+            <div id="project-c" class="project-content" style="display: none;">
+                <h3>Content Management System</h3>
+                <div class="project-demo">
+                    <h4>Live Demo</h4>
+                    <p>Manage content easily with this CMS, featuring custom plugins, user management, and SEO tools.</p>
+                    <div class="cms-container">
+                        <div class="editor">
+                            <h5>Content Editor</h5>
+                            <textarea placeholder="Write your content here..." style="width: 100%; height: 200px;"></textarea>
+                            <button>Save</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-code">
+                    <h4>Code Snippet</h4>
+                    <pre><code>
+use Illuminate\Support\Facades\Route;
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::group(['middleware' => ['auth']], function() {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
+                    </code></pre>
+                </div>
+                <button onclick="hideProject()">Back to Projects</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h3>Contact</h3>
+            <div class="contact-info">
+                <p><strong>Email:</strong> <a href="mailto:stealsillar@gmail.com">stealsillar@gmail.com</a></p>
+                <p><strong>Phone:</strong> <a href="tel:+380735181186">+380735181186</a></p>
+                <p><strong>Website:</strong> <a href="https://www.yourwebsite.com" target="_blank">www.yourwebsite.com</a></p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Illarion Zavatskyi. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
+<!-- partial -->
+  <script  src="./script.js"></script>
+
+</body>
+</html>
